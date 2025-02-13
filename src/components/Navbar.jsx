@@ -4,7 +4,7 @@ function Navbar() {
       <div>
         <img src="/header-name.svg" alt="name" />
       </div>
-      <div>
+      <div className="max-md:hidden">
         <ul className="flex justify-center items-center space-x-3 *:hover:text-white cursor-pointer">
           <li className="text-gray-100">Events</li>
           <li className="text-gray-400">My Tickets</li>

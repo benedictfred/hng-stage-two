@@ -32,7 +32,7 @@ function TicketSelection({ setStep }) {
       <div className="bg-[#07373F] h-1 w-full mt-5"></div>
       <div className="font-roboto mt-5 space-y-2">
         <p>Select Ticket Type:</p>
-        <div className="bg-[#052228]  border border-[#07373F] p-3 flex gap-5 rounded-2xl">
+        <div className="bg-[#052228]  border border-[#07373F] p-3 flex gap-5 rounded-2xl max-sm:flex-col">
           <TicketType
             name="Regular Access"
             price="Free"
@@ -68,12 +68,12 @@ function TicketSelection({ setStep }) {
         </select>
       </div>
 
-      <div className="flex space-x-5 justify-center items-center mt-5">
+      <div className="flex space-x-5 justify-center items-center mt-5 max-sm:space-x-0 max-sm:flex-col-reverse">
         <button className="border border-[#24A0B5] text-[#24A0B5] py-3 rounded-xl w-full cursor-pointer">
           Cancel
         </button>
         <button
-          className="bg-[#24A0B5] py-3 rounded-xl w-full cursor-pointer"
+          className="bg-[#24A0B5] py-3 rounded-xl w-full cursor-pointer max-sm:mb-4"
           onClick={handleSubmit}
         >
           Next

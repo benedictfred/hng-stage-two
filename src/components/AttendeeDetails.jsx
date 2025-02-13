@@ -98,7 +98,7 @@ function AttendeeDetails({ setStep }) {
           <p>Upload Profile Photo</p>
           <div className="flex justify-center items-center bg-[#04292e] mt-4">
             <div
-              className="relative flex flex-col justify-center items-center border-4 border-[#24A0B5] p-4 w-1/2 rounded-4xl h-56 bg-[#24A0B5]/30 cursor-pointer overflow-hidden"
+              className="relative flex flex-col justify-center items-center border-4 border-[#24A0B5] p-4 w-1/2 rounded-4xl h-56 bg-[#24A0B5]/30 cursor-pointer overflow-hidden max-sm:w-[90%]"
               onClick={() => fileInputRef.current?.click()}
               onDrop={handleDrop}
               onDragOver={handleDragOver}
@@ -203,7 +203,7 @@ function AttendeeDetails({ setStep }) {
           ></textarea>
         </div>
 
-        <div className="flex space-x-5 justify-center items-center mt-5 font-jejumyeongjo">
+        <div className="flex space-x-5 justify-center items-center mt-5 font-jejumyeongjo max-sm:space-x-0 max-sm:flex-col-reverse">
           <button
             type="button"
             className="border border-[#24A0B5] text-[#24A0B5] py-3 rounded-xl w-full cursor-pointer"
@@ -213,7 +213,7 @@ function AttendeeDetails({ setStep }) {
           </button>
           <button
             type="submit"
-            className="bg-[#24A0B5] py-3 rounded-xl w-full cursor-pointer"
+            className="bg-[#24A0B5] py-3 rounded-xl w-full cursor-pointer max-sm:mb-4"
           >
             Get My Free Ticket
           </button>

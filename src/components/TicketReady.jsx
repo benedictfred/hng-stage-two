@@ -1,5 +1,5 @@
 import { toPng } from "html-to-image";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 
 function TicketReady({ setStep }) {
   const ticketRef = useRef(null);
@@ -9,21 +9,7 @@ function TicketReady({ setStep }) {
   const handleDownloadTicket = async () => {
     if (ticketRef.current) {
       try {
-        await Promise.all(
-          Array.from(ticketRef.current.getElementsByTagName("img")).map(
-            (img) =>
-              new Promise((resolve) => {
-                if (img.complete) resolve();
-                else img.onload = resolve;
-              })
-          )
-        );
-
-        const dataUrl = await toPng(ticketRef.current, {
-          pixelRatio: 2,
-          backgroundColor: "#0E464F",
-        });
-
+        const dataUrl = await toPng(ticketRef.current);
         const link = document.createElement("a");
         link.download = "techember-fest-ticket.png";
         link.href = dataUrl;
@@ -35,14 +21,17 @@ function TicketReady({ setStep }) {
   };
 
   return (
-    <div className="border border-[#0E464F] rounded-4xl p-5 mt-5">
+    <div className="border border-[#0E464F] rounded-4xl p-5 mt-5 max-sm:p-3 max-sm:border-none">
       <div className="text-center">
         <h1 className="font-alatsi text-3xl">Your Ticket is Booked</h1>
         <p className="font-roboto">
           Check your email for a copy or you can download
         </p>
       </div>
-      <div ref={ticketRef} className="flex items-center justify-center p-8">
+      <div
+        ref={ticketRef}
+        className="flex items-center justify-center p-8 max-sm:p-3"
+      >
         <div className="flex flex-col justify-center items-center relative">
           <img
             src="/ticket.png"
@@ -50,14 +39,16 @@ function TicketReady({ setStep }) {
             className="w-full h-full object-contain"
           />
 
-          <div className="absolute top-5 flex flex-col justify-center items-center w-[280px] p-4 border border-[#24A0B5] rounded-lg">
+          <div className="absolute top-5 flex flex-col justify-center items-center w-[280px] p-4 border border-[#24A0B5] rounded-lg max-sm:h-[390px] max-sm:w-[240px]">
             <div className="text-center flex flex-col justify-center items-center space-y-2">
-              <p className="font-road-rage text-5xl">Techember Fest &quot;25</p>
-              <p className="flex items-center gap-2 text-sm font-roboto">
-                <span>📍</span> 04 Rumens road, Ikoyi, Lagos
+              <p className="font-road-rage text-5xl max-sm:text-2xl">
+                Techember Fest &quot;25
               </p>
               <p className="flex items-center gap-2 text-sm font-roboto">
-                <span>📅</span> March 15, 2025 | 7:00 PM
+                📍04 Rumens road, Ikoyi, Lagos
+              </p>
+              <p className="flex items-center gap-2 text-sm font-roboto">
+                📅March 15, 2025 | 7:00 PM
               </p>
             </div>
 
@@ -74,7 +65,7 @@ function TicketReady({ setStep }) {
                       <span className="text-gray-500 text-[10px]">
                         Enter your name
                       </span>
-                      <span className="font-bold text-xs break-words">
+                      <span className="font-bold text-xs break-words max-sm:text-[10px]">
                         {attendeeDetails.fullName}
                       </span>
                     </p>
@@ -82,7 +73,7 @@ function TicketReady({ setStep }) {
                       <span className="text-gray-500 text-[10px]">
                         Enter your email*
                       </span>
-                      <span className="font-bold text-xs break-words">
+                      <span className="font-bold text-xs break-words max-sm:text-[10px]">
                         {attendeeDetails.email}
                       </span>
                     </p>
@@ -129,7 +120,7 @@ function TicketReady({ setStep }) {
           />
         </div>
       </div>
-      <div className="flex space-x-5 justify-center items-center mt-5">
+      <div className="flex space-x-5 justify-center items-center mt-5 max-sm:space-x-0 max-sm:flex-col-reverse">
         <button
           className="border border-[#24A0B5] text-[#24A0B5] py-3 rounded-xl w-full cursor-pointer"
           onClick={() => setStep(1)}
@@ -137,7 +128,7 @@ function TicketReady({ setStep }) {
           Book Another Ticket
         </button>
         <button
-          className="bg-[#24A0B5] py-3 rounded-xl w-full cursor-pointer"
+          className="bg-[#24A0B5] py-3 rounded-xl w-full cursor-pointer max-sm:mb-4"
           onClick={handleDownloadTicket}
         >
           Download Ticket
