@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { resizeImage } from "../utils/helpers";
 
 function AttendeeDetails({ setStep }) {
   const [formData, setFormData] = useState(
@@ -27,8 +28,10 @@ function AttendeeDetails({ setStep }) {
   const handleImageUpload = async (file) => {
     if (!file) return;
 
+    const resizedImage = await resizeImage(file);
+
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append("file", resizedImage, file.name);
     formData.append("upload_preset", "hng-task");
 
     try {
