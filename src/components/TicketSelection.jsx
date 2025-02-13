@@ -3,12 +3,14 @@ import TicketType from "./TicketType";
 
 function TicketSelection({ setStep }) {
   const [activeTicket, setActiveTicket] = useState(() => {
-    const evenInfo = JSON.parse(localStorage.getItem("eventInfo"));
-    if (evenInfo) return evenInfo.activeTicket || "regular";
+    const eventInfo = JSON.parse(localStorage.getItem("eventInfo"));
+    if (eventInfo) return eventInfo?.activeTicket;
+    return "regular";
   });
   const [ticketCount, setTicketCount] = useState(() => {
-    const evenInfo = JSON.parse(localStorage.getItem("eventInfo"));
-    if (evenInfo) return +evenInfo.ticketCount || 1;
+    const eventInfo = JSON.parse(localStorage.getItem("eventInfo"));
+    if (eventInfo) return +eventInfo?.ticketCount;
+    return 1;
   });
 
   function handleSubmit() {
