@@ -1,8 +1,22 @@
 import { useState } from "react";
 import TicketType from "./TicketType";
 
-function TicketSelection() {
-  const [activeTicket, setActiveTicket] = useState("regular");
+function TicketSelection({ setStep }) {
+  const [activeTicket, setActiveTicket] = useState(() => {
+    const evenInfo = JSON.parse(localStorage.getItem("eventInfo"));
+    if (evenInfo) return evenInfo.activeTicket || "regular";
+  });
+  const [ticketCount, setTicketCount] = useState(() => {
+    const evenInfo = JSON.parse(localStorage.getItem("eventInfo"));
+    if (evenInfo) return +evenInfo.ticketCount || 1;
+  });
+
+  function handleSubmit() {
+    const eventInfo = { activeTicket, ticketCount };
+    localStorage.setItem("eventInfo", JSON.stringify(eventInfo));
+    setStep(2);
+  }
+
   return (
     <div className="border border-[#0E464F] rounded-4xl p-5 mt-5">
       <div className="border border-[#07373F] rounded-2xl flex flex-col justify-center items-center p-5 text-center radial-gradient-left">
@@ -42,8 +56,8 @@ function TicketSelection() {
       <div className="font-roboto mt-5 space-y-2">
         <p>Number of Tickets</p>
         <select
-          name=""
-          id=""
+          value={ticketCount}
+          onChange={(e) => setTicketCount(Number(e.target.value))}
           className="border border-[#07373F] w-full active:outline-none active:border-none p-3 rounded-lg *:bg-[#07373F] outline-none"
         >
           {Array.from({ length: 20 }, (_, i) => (
@@ -55,10 +69,15 @@ function TicketSelection() {
       </div>
 
       <div className="flex space-x-5 justify-center items-center mt-5">
-        <button className="border border-[#24A0B5] text-[#24A0B5] py-3 rounded-xl w-full">
+        <button className="border border-[#24A0B5] text-[#24A0B5] py-3 rounded-xl w-full cursor-pointer">
           Cancel
         </button>
-        <button className="bg-[#24A0B5] py-3 rounded-xl w-full">Next</button>
+        <button
+          className="bg-[#24A0B5] py-3 rounded-xl w-full cursor-pointer"
+          onClick={handleSubmit}
+        >
+          Next
+        </button>
       </div>
     </div>
   );

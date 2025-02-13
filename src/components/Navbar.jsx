@@ -1,6 +1,6 @@
 function Navbar() {
   return (
-    <nav className="flex w-full justify-between items-center border border-[#197686] py-2 px-2 mx-auto max-w-5xl mt-8 rounded-2xl">
+    <nav className="flex w-full justify-between items-center border border-[#197686] py-2 px-2 mx-auto max-w-5xl mt-8 rounded-2xl sticky top-0 bg-[#02191d] z-10">
       <div>
         <img src="/header-name.svg" alt="name" />
       </div>
