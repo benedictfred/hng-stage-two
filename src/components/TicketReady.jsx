@@ -1,14 +1,16 @@
 import { toPng } from "html-to-image";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 function TicketReady({ setStep }) {
   const ticketRef = useRef(null);
   const eventInfo = JSON.parse(localStorage.getItem("eventInfo"));
   const attendeeDetails = JSON.parse(localStorage.getItem("attendeeForm"));
+  const [isDownloading, setIsDownloading] = useState(false);
 
   const handleDownloadTicket = async () => {
     if (ticketRef.current) {
       try {
+        setIsDownloading(true);
         const dataUrl = await toPng(ticketRef.current);
         const link = document.createElement("a");
         link.download = "techember-fest-ticket.png";
@@ -16,6 +18,8 @@ function TicketReady({ setStep }) {
         link.click();
       } catch (error) {
         console.error("Error downloading ticket:", error);
+      } finally {
+        setIsDownloading(false);
       }
     }
   };
@@ -39,7 +43,7 @@ function TicketReady({ setStep }) {
             className="w-full h-full object-contain"
           />
 
-          <div className="absolute top-5 flex flex-col justify-center items-center w-[280px] p-4 border border-[#24A0B5] rounded-lg max-sm:h-[390px] max-sm:w-[240px]">
+          <div className="absolute top-5 flex flex-col justify-center items-center w-[280px] p-4 border border-[#24A0B5] rounded-lg max-sm:h-[385px] max-sm:w-[240px]">
             <div className="text-center flex flex-col justify-center items-center space-y-2">
               <p className="font-road-rage text-5xl max-sm:text-2xl">
                 Techember Fest &quot;25
@@ -134,6 +138,11 @@ function TicketReady({ setStep }) {
           Download Ticket
         </button>
       </div>
+      {isDownloading && (
+        <div className="min-h-screen flex items-center justify-center inset-0  w-full fixed bg-black/50  z-[100]">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500" />
+        </div>
+      )}
     </div>
   );
 }

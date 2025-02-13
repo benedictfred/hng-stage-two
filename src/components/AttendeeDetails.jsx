@@ -126,14 +126,16 @@ function AttendeeDetails({ setStep }) {
                         src="/cloud-download.svg"
                         alt="cloud-download-icon"
                       />
-                      <p className="text-sm">Drag & drop or click to upload</p>
+                      <p className="text-sm text-center">
+                        Drag & drop or click to upload
+                      </p>
                     </div>
                   )}
                 </>
               ) : (
                 <>
                   <img src="/cloud-download.svg" alt="cloud-download-icon" />
-                  <p className="text-sm text-white">
+                  <p className="text-sm text-white text-center">
                     Drag & drop or click to upload
                   </p>
                 </>
